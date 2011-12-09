@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "blitline.gemspec",
     "lib/blitline.rb",
     "lib/blitline/attribute_jsonizer.rb",
     "lib/blitline/function.rb",
