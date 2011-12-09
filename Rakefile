@@ -15,7 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "blitline"
-  gem.homepage = "http://github.com/blitline_dev/blitline"
+  gem.homepage = "http://github.com/blitline-dev/blitline"
   gem.license = "MIT"
   gem.summary = %Q{Blitline provides simple image processing in the cloud}
   gem.description = %Q{The blitline gems provides a simple easy wrapper to the Blitline.com web api}
