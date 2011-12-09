@@ -17,10 +17,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "blitline"
   gem.homepage = "http://github.com/blitline_dev/blitline"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Blitline provides simple image processing in the cloud}
+  gem.description = %Q{The blitline gems provides a simple easy wrapper to the Blitline.com web api}
   gem.email = "support@blitline.com"
-  gem.authors = ["developer blitline"]
+  gem.authors = ["Blitline LLC"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
