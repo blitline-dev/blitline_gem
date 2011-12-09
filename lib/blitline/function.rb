@@ -24,7 +24,7 @@ class Blitline
 
     def validate
       raise "Function must have a name" if @name.nil?
-      raise "Params must be a hash" if @params && !@params.is_a(Hash)
+      raise "Params must be a hash" if @params && !@params.is_a?(Hash)
       @save.validate if @save
       @functions.each { |f| f.validate } if @functions
     end

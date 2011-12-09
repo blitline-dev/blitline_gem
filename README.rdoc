@@ -1,6 +1,38 @@
 = blitline
+You must first have a Blitline.com account to successfully use the gem. You can obtain one (free) by going to (http://www.blitline.com)[http://www.blitline.com]
 
-Description goes here.
+Once you have your account, you will need to find you ACCOUNT_ID which you can get by logging in and clicking on the *Account* tab.
+
+
+In you application environment, install the Blitline gem or add the Blitline gem to your Gemfile
+
+    $ gem install blitline
+
+or...if you have a Gemfile
+
+    gem 'blitline'
+
+Once the gem is installed, you can start a Rails console and try the following:
+
+    $ blitline_service = Blitline.new
+    $ job = Blitline::Job.new("http://www.google.com/logos/2011/yokoyama11-hp.jpg") #My source file to manipulate
+    $ job.add_function("blur", "{radius:1}", "my_first_image") # Add a blur function, with no params, and give a unique name to the result
+    $ job.application_id = "ACCOUNT_ID" # This ACCOUNT_ID needs to be your account ID from Blitline which you got from Blitline.com above
+    $ blitline_service.jobs << job # Push job into service
+    $ blitline_service.post_jobs
+
+And you will get JSON back describing where the resulting image will be located
+There are many more things you can do with images (including pushing them to your own S3 buckets). 
+
+
+You can find documentation about Blitline.com and it's services by following the links in the *Further reading* section below
+
+Further reading:
+
+* (Quickstart)[http://www.blitline.com/docs/quickstart]
+* (Blitline Blog)[http://blitline.tumblr.com]
+
+
 
 == Contributing to blitline
  
