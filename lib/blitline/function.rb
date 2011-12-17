@@ -6,6 +6,7 @@ class Blitline
     def initialize(name, params = nil)
       @name = name
       @params = params unless params.nil?
+      @functions = []
     end
 
     def add_save(image_identifier, s3_key = nil, s3_bucket = nil)

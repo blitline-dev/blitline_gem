@@ -3,7 +3,7 @@ class Blitline
     include AttributeJsonizer
     attr_accessor :application_id, :src, :postback_url, :functions
 
-    def initialize(image_src)
+    def initialize(image_src, application_id = nil)
       @src = image_src
       @functions = []
     end
@@ -12,6 +12,7 @@ class Blitline
       function = Blitline::Function.new(function_name, function_params)
       function.add_save(image_identifier) if image_identifier
       @functions << function
+      return function
     end
 
     def validate
