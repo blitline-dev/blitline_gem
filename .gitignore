@@ -30,7 +30,7 @@ pkg
 #.DS_Store
 
 # For TextMate
-#*.tmproj
+*.tmproj
 #tmtags
 
 # For emacs:
