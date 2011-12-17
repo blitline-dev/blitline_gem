@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "blitline"
-  s.version = "1.0.3"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Blitline LLC"]
-  s.date = "2011-12-09"
+  s.date = "2011-12-17"
   s.description = "The blitline gems provides a simple easy wrapper to the Blitline.com web api"
   s.email = "support@blitline.com"
   s.extra_rdoc_files = [
