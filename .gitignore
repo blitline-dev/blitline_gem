@@ -31,6 +31,8 @@ pkg
 
 # For TextMate
 *.tmproj
+._*
+
 #tmtags
 
 # For emacs:
