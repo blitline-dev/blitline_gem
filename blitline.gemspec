@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "blitline"
-  s.version = "1.2.0"
+  s.version = "1.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Blitline LLC"]
-  s.date = "2011-12-18"
+  s.date = "2012-01-23"
   s.description = "The blitline gems provides a simple easy wrapper to the Blitline.com web api"
   s.email = "support@blitline.com"
   s.extra_rdoc_files = [
@@ -33,7 +33,8 @@ Gem::Specification.new do |s|
     "lib/blitline/s3_destination.rb",
     "lib/blitline/save.rb",
     "test/helper.rb",
-    "test/test_blitline.rb"
+    "test/test_blitline.rb",
+    "test/test_service.rb"
   ]
   s.homepage = "http://github.com/blitline-dev/blitline"
   s.licenses = ["MIT"]
