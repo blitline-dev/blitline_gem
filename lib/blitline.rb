@@ -40,6 +40,7 @@ class Blitline
 
   def post_jobs
     validate
+    puts "@jobs = #{Yajl::Encoder.encode(@jobs)}"
     result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => Yajl::Encoder.encode(@jobs)})
     return Yajl::Parser.parse(result)
   end

@@ -17,10 +17,10 @@ class Blitline
       @save = save
     end
 
-    def add_function(function_name, function_params, image_identifier = nil)
+    def add_function(function_name, function_params)
       function = Blitline::Function.new(function_name, function_params)
       @functions << function
-      function.add_save(image_identifier) if image_identifier
+      return function
     end
 
     def validate
