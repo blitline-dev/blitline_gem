@@ -20,18 +20,18 @@ class TestService < Test::Unit::TestCase
       blitline = Blitline.new
       job =  Blitline::Job.new(SAMPLE_IMAGE_SRC)
       job.application_id = ENV['BLITLINE_APPLICATION_ID']
-      watermark_function = job.add_function("watermark", {text:"Jason"})
+      watermark_function = job.add_function("watermark", {'text'=>"Jason"})
       watermark_function.add_save("watermarked")#, @key, @s3_config['bucket_name'])
 
       # begin sub-functions
-      original_function = watermark_function.add_function("resize_to_fit", {width:2000, height:2000})
+      original_function = watermark_function.add_function("resize_to_fit", {'width'=>2000, 'height'=>2000})
       original_function.add_save("original")#, key('original'), @s3_config['bucket_name'])
 
-      sm_gallery_function = watermark_function.add_function("resize_to_fill", {width:200, height:200})
+      sm_gallery_function = watermark_function.add_function("resize_to_fill", {'width'=>200, 'height'=>200})
       sm_gallery_function.add_save("smgallery")#, key('sm_gallery'), @s3_config['bucket_name'])
 
       # if I add a third subfunction, the job appears to fail. If I remove these two lines below, the job works.
-      thumb_function = watermark_function.add_function("resize_to_fit", {width:100, height:100})
+      thumb_function = watermark_function.add_function("resize_to_fit", {'width'=>100, 'height'=>100})
       thumb_function.add_save("thumb")#, key('thumb'), @s3_config['bucket_name'])
 
       blitline.jobs << job
