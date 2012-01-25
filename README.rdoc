@@ -26,7 +26,7 @@ And you will get JSON back describing where the resulting image will be located
 There are many more things you can do with images (including pushing them to your own S3 buckets).
 
 
-You can find documentation about Blitline.com and it's services by following the links in the *Further reading* section below
+You can find documentation about Blitline.com and it's services by following the links below
 
 Further reading:
 
