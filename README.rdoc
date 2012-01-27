@@ -15,10 +15,10 @@ or...if you have a Gemfile
 Once the gem is installed, you can start a Rails console and try the following:
 
     $ blitline_service = Blitline.new
-    $ job = Blitline::Job.new("http://www.google.com/logos/2011/yokoyama11-hp.jpg") #My source file to manipulate
+    $ job = Blitline::Job.new("http://www.google.com/logos/2011/yokoyama11-hp.jpg") # My source file to manipulate
     $ job.application_id = "ACCOUNT_ID" # This ACCOUNT_ID needs to be your account ID from Blitline which you got from Blitline.com above
-    $ job.add_function("blur", {radius:1}) # Add a blur function, with no params
-    $ job.add_save("my_first_image") # Adds a save function (which identifies what the image is identified as on callback/polling
+    $ job.add_function("blur", {radius:1}) # Add a blur function
+    $ job.add_save("my_first_image") # Adds a save function (which identifies what the image is identified as on callback/polling)
     $ blitline_service.jobs << job # Push job into service
     $ blitline_service.post_jobs
 
