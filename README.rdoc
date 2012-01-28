@@ -1,4 +1,4 @@
-# Getting Started
+Getting Started
 
 You must first have a Blitline.com account to successfully use the gem. You can obtain one (free) by going to http://www.blitline.com
 
