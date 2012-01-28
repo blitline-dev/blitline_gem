@@ -1,4 +1,5 @@
-= blitline
+# Getting Started
+
 You must first have a Blitline.com account to successfully use the gem. You can obtain one (free) by going to http://www.blitline.com
 
 Once you have your account, you will need to find you ACCOUNT_ID which you can get by logging in and clicking on the *Account* tab.
@@ -14,11 +15,11 @@ or...if you have a Gemfile
 
 Once the gem is installed, you can start a Rails console and try the following:
 
-    $ blitline_service = Blitline.new
     $ job = Blitline::Job.new("http://www.google.com/logos/2011/yokoyama11-hp.jpg") # My source file to manipulate
     $ job.application_id = "ACCOUNT_ID" # This ACCOUNT_ID needs to be your account ID from Blitline which you got from Blitline.com above
-    $ blur_function = job.add_function("blur", {radius:1}) # Add a blur function
-    $ blur_function.add_save("my_first_image") # Adds a save function (which identifies what the image is identified as on callback/polling)
+    $ blur_function = job.add_function("blur", {:radius => 1}) # Add a blur function
+    $ blur_function.add_save("my_first_image") # Adds a save function (which takes a string parameter which is what the image is identified as on callback/polling)
+    $ blitline_service = Blitline.new
     $ blitline_service.jobs << job # Push job into service
     $ blitline_service.post_jobs
 
@@ -27,26 +28,9 @@ There are many more things you can do with images (including pushing them to you
 
 
 You can find documentation about Blitline.com and it's services by following the links below
-
 Further reading:
 
-* (Quickstart)[http://www.blitline.com/docs/quickstart]
-* (Blitline Blog)[http://blitline.tumblr.com]
+* [Quickstart](http://www.blitline.com/docs/quickstart)
+* [Blitline Blog](http://blitline.tumblr.com)
 
-
-
-== Contributing to blitline
-
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
-
-== Copyright
-
-Copyright (c) 2011 developer blitline. See LICENSE.txt for
-further details.
 
