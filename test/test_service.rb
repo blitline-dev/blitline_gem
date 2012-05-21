@@ -16,6 +16,19 @@ class TestService < Test::Unit::TestCase
       assert(returned_values['results'][0]['images'].length > 0, "No images returned")
     end
 
+    should "be able to commit a simple job to service with s3 headers" do
+      blitline = Blitline.new
+      job =  Blitline::Job.new(SAMPLE_IMAGE_SRC)
+      job.application_id = ENV['BLITLINE_APPLICATION_ID']
+      function = job.add_function("blur", nil, "my_image")
+      function.add_save("my_image", "grumpy_squirrel/frame2.jpg", "bltemp", { "x-amz-meta-foo" => "bar", "x-amz-meta-baz" => "qux"})
+      blitline.jobs << job
+      returned_values = blitline.post_jobs
+      puts "----", returned_values.inspect
+      assert(returned_values.length > 0, "No results returned")
+      assert(returned_values['results'][0]['images'].length > 0, "No images returned")
+    end
+
     should "be able to commit a job with multiple embedded functions" do
       blitline = Blitline.new
       job =  Blitline::Job.new(SAMPLE_IMAGE_SRC)

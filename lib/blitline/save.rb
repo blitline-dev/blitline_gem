@@ -7,8 +7,8 @@ class Blitline
       @image_identifier = image_identifier
     end
 
-    def add_s3_destination(key, bucket)
-      @s3_destination = Blitline::S3Destination.new(key, bucket)
+    def add_s3_destination(key, bucket, headers = {})
+      @s3_destination = Blitline::S3Destination.new(key, bucket, headers)
     end
 
     def validate

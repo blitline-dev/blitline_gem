@@ -9,10 +9,10 @@ class Blitline
       @functions = []
     end
 
-    def add_save(image_identifier, s3_key = nil, s3_bucket = nil)
+    def add_save(image_identifier, s3_key = nil, s3_bucket = nil, headers = {})
       save = Blitline::Save.new(image_identifier)
       if s3_key && s3_bucket
-        save.add_s3_destination(s3_key, s3_bucket)
+        save.add_s3_destination(s3_key, s3_bucket, headers)
       end
       @save = save
     end
