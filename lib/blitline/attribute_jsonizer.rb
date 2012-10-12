@@ -1,6 +1,11 @@
 module AttributeJsonizer
   require 'yajl'
 
+  def add_jsonizable_attribute(json_name, jsonizeable_object)
+    self.class.module_eval { attr_accessor json_name.to_sym}
+    self.send("#{json_name.to_s}=", jsonizeable_object)
+  end
+
   def to_json
     json_hash = {}
     self.instance_variables.each do |iv|
