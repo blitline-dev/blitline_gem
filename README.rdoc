@@ -32,5 +32,5 @@ Further reading:
 
 * [Quickstart](http://www.blitline.com/docs/quickstart)
 * [Blitline Blog](http://blitline.tumblr.com)
-
+* [See all the available functions](http://www.blitline.com/docs/functions)
 
