@@ -24,7 +24,30 @@ class TestService < Test::Unit::TestCase
       function.add_save("my_image", "grumpy_squirrel/frame2.jpg", "bltemp", { "x-amz-meta-foo" => "bar", "x-amz-meta-baz" => "qux"})
       blitline.jobs << job
       returned_values = blitline.post_jobs
-      puts "----", returned_values.inspect
+      assert(returned_values.length > 0, "No results returned")
+      assert(returned_values['results'][0]['images'].length > 0, "No images returned")
+    end
+
+    should "be able to add job via hash" do
+      blitline = Blitline.new
+      blitline.add_job_via_hash({
+          "application_id"=>"#{ENV['BLITLINE_APPLICATION_ID']}",
+          "src"=>"http://cdn.blitline.com/filters/boys.jpeg",
+          "functions"=>[
+              {
+                  "name"=>"resize_to_fit",
+                  "params"=>{
+                      "width"=>100
+                  },
+                  "save"=>{
+                      "image_identifier"=>"MY_CLIENT_ID"
+                  }
+              }
+          ]
+      })
+
+
+      returned_values = blitline.post_jobs
       assert(returned_values.length > 0, "No results returned")
       assert(returned_values['results'][0]['images'].length > 0, "No images returned")
     end

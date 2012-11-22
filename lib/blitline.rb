@@ -33,9 +33,17 @@ class Blitline
     @jobs << job
   end
 
+  def add_job_via_hash(hash)
+    @jobs << hash
+  end
+
   def validate
     raise "At least 1 job must be present to run" if @jobs.length < 1
-    @jobs.each { |j| j.validate }
+    @jobs.each do |j|
+      unless j.is_a?(Hash)
+        j.validate
+      end
+    end
   end
 
   def post_jobs
