@@ -1,5 +1,5 @@
 class Blitline
-  require 'yajl'
+  require 'multi_json'
   require 'blitline/attribute_jsonizer'
   require 'blitline/function'
   require 'blitline/job'
@@ -40,8 +40,9 @@ class Blitline
 
   def post_jobs
     validate
-    result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => Yajl::Encoder.encode(@jobs)})
-    return Yajl::Parser.parse(result)
+#    puts MultiJson.dump(@jobs).inspect
+    result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+    return MultiJson.load(result)
   end
 
 end

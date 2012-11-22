@@ -1,4 +1,5 @@
 require 'helper'
+require 'multi_json'
 
 class TestBlitline < Test::Unit::TestCase
 
@@ -58,7 +59,7 @@ class TestBlitline < Test::Unit::TestCase
     job.application_id = "foo"
     job.add_jsonizable_attribute("pre_process", { "move_original" => { "s3_destination" => Blitline::S3Destination.new("my_key","my_bucket")}})
   
-    results = Yajl::Encoder.encode(job)
+    results = MultiJson.dump(job)
     assert_not_nil results["pre_process"]
     assert results == '{"src":"http://ww.foo.com","functions":[{"name":"blue","save":{"image_identifier":"my_image"}}],"application_id":"foo","pre_process":{"move_original":{"s3_destination":{"key":"my_key","bucket":"my_bucket","headers":{}}}}}'
   end

@@ -2,7 +2,7 @@ require 'helper'
 
 class TestService < Test::Unit::TestCase
   if ENV['BLITLINE_APPLICATION_ID']
-    require 'yajl'
+    require 'multi_json'
     SAMPLE_IMAGE_SRC = "http://www.google.com/intl/en_com/images/srpr/logo3w.png"
 
     should "be able to commit a simple job to service" do
