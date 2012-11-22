@@ -65,5 +65,5 @@ The example above is a trivial (and pretty uninteresting) demonstration of how t
 
 * [Quickstart](http://www.blitline.com/docs/quickstart)
 * [Blitline Blog](http://blitline.tumblr.com)
-
+* [See all the available functions](http://www.blitline.com/docs/functions)
 
