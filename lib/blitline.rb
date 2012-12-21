@@ -48,8 +48,8 @@ class Blitline
 
   def post_jobs
     validate
-#    puts MultiJson.dump(@jobs).inspect
     result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+    @jobs = [] # clear jobs
     return MultiJson.load(result)
   end
 
