@@ -5,23 +5,23 @@
 
 Gem::Specification.new do |s|
   s.name = "blitline"
-  s.version = "2.0.1"
+  s.version = "2.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Blitline LLC"]
-  s.date = "2012-11-22"
+  s.date = "2012-12-21"
   s.description = "The blitline gems provides a simple easy wrapper to the Blitline.com web api"
   s.email = "support@blitline.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".document",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
-    "README.rdoc",
+    "README.md",
     "Rakefile",
     "VERSION",
     "blitline.gemspec",
