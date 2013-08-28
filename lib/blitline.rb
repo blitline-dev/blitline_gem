@@ -6,7 +6,8 @@ class Blitline
   require 'blitline/save'
   require 'blitline/s3_destination'
   require 'blitline/http_poster'
-
+  require 'net/http'
+  
   include AttributeJsonizer
   attr_accessor :jobs
 
@@ -51,6 +52,26 @@ class Blitline
     result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
     @jobs = [] # clear jobs
     return MultiJson.load(result)
+  end
+
+  def post_job_and_wait_for_poll
+     validate
+     raise "'post_job_with_poll' requires that there is only 1 job to submit" unless @jobs.length==1
+     result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+     json_result = MultiJson.load(result)
+     raise "Error posting job: #{result.to_s}" if result["error"]
+     job_id = json_result["results"][0]["job_id"]
+     return poll_job(job_id)
+  end
+
+  def poll_job(job_id)
+     raise "Invalid 'job_id'" unless job_id && job_id.length > 0
+     url = "/listen/#{job_id}"
+     response = Net::HTTP.get('cache.blitline.com', url)
+     json_response = MultiJson.load(response)
+     return_results = MultiJson.load(json_response["results"])
+
+     return return_results
   end
 
 end

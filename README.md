@@ -61,6 +61,22 @@ This result does not indicate that the job is done! The job has been put on a qu
 way to identify when the job is completed is by adding a `postback_url` to the job hash and we will call back that url
 when we have completed the image processing.
 
+As an alternative to blitline_service.post_jobs, you can use blitline_service.post_job_and_wait
+
+    $ blitline_service.post_job_and_wait
+
+Which will block, and using Blitline's [long polling](http://www.blitline.com/docs/polling) functionality, return when the job is completed. The returned result will look like
+
+```js
+{"original_meta"=>{"width"=>720, "height"=>540}, "images"=>[{"image_identifier"=>"MY_CLIENT_ID", "s3_url"=>"http://s3.amazonaws.com/blitline/2013082822/20/7J6Izja0hkG7rvNj-MUJDfQ.jpg", "meta"=>{"width"=>100, "height"=>75}}], "job_id"=>"9hgxoQ10WI7YN2QcioUarbA"}
+```
+
+This JSON contains:
+- Any error information associated with the job
+- Metadata associated with the original image
+- A list of images processed.
+
+In fact, this result will contain all the exact same information a Blitline postback would contain.
 
 The example above is a trivial (and pretty uninteresting) demonstration of how to use the Blitline gem. You can find documentation about Blitline.com and it's services by following the links below
 
