@@ -63,9 +63,9 @@ when we have completed the image processing.
 
 As an alternative to blitline_service.post_jobs, you can use blitline_service.post_job_and_wait
 
-    $ blitline_service.post_job_and_wait
+    $ blitline_service.post_job_and_wait_for_poll
 
-Which will block, and using Blitline's [long polling](http://www.blitline.com/docs/polling) functionality, return when the job is completed. The returned result will look like
+Which will block, and using Blitline's [long polling](http://www.blitline.com/docs/polling) functionality, return when the job is completed. There must be only one requested job. The returned result will look like
 
 ```js
 {"original_meta"=>{"width"=>720, "height"=>540}, "images"=>[{"image_identifier"=>"MY_CLIENT_ID", "s3_url"=>"http://s3.amazonaws.com/blitline/2013082822/20/7J6Izja0hkG7rvNj-MUJDfQ.jpg", "meta"=>{"width"=>100, "height"=>75}}], "job_id"=>"9hgxoQ10WI7YN2QcioUarbA"}
