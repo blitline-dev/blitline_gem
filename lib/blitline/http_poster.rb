@@ -15,8 +15,8 @@ class Blitline
         if response.is_a? Net::HTTPSuccess
           return response.read_body(&block)
         else
-          response.read_body
-          response.error!
+          result_data = response.read_body(&block)
+          raise "Post to Blitline.com failed. #{response.code}: #{result_data}"
         end
       end
     end
