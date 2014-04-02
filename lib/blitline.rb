@@ -13,6 +13,7 @@ class Blitline
 
   def initialize
     @jobs = []
+    @domain = ENV['BLITLINE_DOMAIN'] || "api"
   end
 
   # Heroku users don't need to specify application_id if they have ENV['BLITLINE_URL'] defined
@@ -49,7 +50,7 @@ class Blitline
 
   def post_jobs
     validate
-    result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+    result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
     @jobs = [] # clear jobs
     return MultiJson.load(result)
   end
@@ -57,7 +58,7 @@ class Blitline
   def post_job_and_wait_for_poll
      validate
      raise "'post_job_with_poll' requires that there is only 1 job to submit" unless @jobs.length==1
-     result = Blitline::HttpPoster.post("http://api.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+     result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
      json_result = MultiJson.load(result)
      raise "Error posting job: #{result.to_s}" if result["error"]
      job_id = json_result["results"][0]["job_id"]
