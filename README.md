@@ -53,7 +53,7 @@ This JSON contains:
 
 - Any error information that may have happened with the submit
 - A list of images
-  - Each image has an `image_indentifier`, which is the `image_identifier` you used in the `save` params.
+  - Each image has an `image_identifier`, which is the `image_identifier` you used in the `save` params.
   - Each image also has an `s3_url` which is the final destination of the image (once it is done processing).
 
 ### Important! ###
