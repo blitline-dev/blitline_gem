@@ -70,9 +70,8 @@ class Blitline
      url = "/listen/#{job_id}"
      response = Net::HTTP.get('cache.blitline.com', url)
      json_response = MultiJson.load(response)
-     return_results = MultiJson.load(json_response["results"])
 
-     return return_results
+     return json_response
   end
 
 end
