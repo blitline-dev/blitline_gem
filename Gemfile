@@ -11,3 +11,4 @@ group :development do
 end
 
 gem 'multi_json'
+gem 'terminator'
