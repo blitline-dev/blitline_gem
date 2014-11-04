@@ -48,3 +48,6 @@ pkg
 
 # For rubinius:
 #*.rbc
+
+# Ignoring built gem
+*.gem
