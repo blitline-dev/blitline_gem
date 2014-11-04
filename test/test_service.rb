@@ -61,7 +61,7 @@ class TestService < Test::Unit::TestCase
 
       returned_values = blitline.post_job_and_wait_for_poll
       assert(returned_values.length > 0, "No results returned")
-      assert(returned_values['images'].length > 0, "No images returned")
+      assert(returned_values['results']['images'].length > 0, "No images returned")
     end
 
     should "be able to handle incorrect JSON" do
@@ -85,7 +85,7 @@ class TestService < Test::Unit::TestCase
 
       returned_values = blitline.post_job_and_wait_for_poll
       assert(returned_values.length > 0, "No results returned")
-      assert(returned_values['images'].length > 0, "No images returned")
+      assert(returned_values['results']['images'].length > 0, "No images returned")
     end
 
     should "be able to commit a job with multiple embedded functions" do
