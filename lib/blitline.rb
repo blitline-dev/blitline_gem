@@ -7,6 +7,7 @@ class Blitline
   require 'blitline/s3_destination'
   require 'blitline/http_poster'
   require 'net/http'
+  require 'terminator'
   
   include AttributeJsonizer
   attr_accessor :jobs

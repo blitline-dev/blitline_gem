@@ -8,7 +8,8 @@ source "http://rubygems.org"
 group :development do
   gem "shoulda", ">= 0"
   gem "jeweler"
+  gem "pry"
 end
 
-gem 'multi_json'
-gem 'terminator'
+gem "multi_json"
+gem "terminator"
