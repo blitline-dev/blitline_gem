@@ -70,7 +70,7 @@ class Blitline
     raise "Invalid 'job_id'" unless job_id && job_id.length > 0
     url = "/listen/#{job_id}"
 
-    response = {}
+    response = "{}"
 
     begin
       Terminator.terminate 2 do
