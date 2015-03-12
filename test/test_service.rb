@@ -19,19 +19,26 @@ class TestService < Test::Unit::TestCase
     should "be able to add job via hash" do
       blitline = Blitline.new
       blitline.add_job_via_hash({
-          "application_id"=>"#{ENV['BLITLINE_APPLICATION_ID']}",
-          "src"=>"http://cdn.blitline.com/filters/boys.jpeg",
-          "functions"=>[
-              {
-                  "name"=>"resize_to_fit",
-                  "params"=>{
-                      "width"=>100
-                  },
-                  "save"=>{
-                      "image_identifier"=>"MY_CLIENT_ID"
-                  }
-              }
-          ]
+            "application_id"=> "#{ENV['BLITLINE_APPLICATION_ID']}",
+            "src"=> SAMPLE_IMAGE_SRC,
+            "src_data" => { "colorspace" => "srgb"},
+            "postback_url" => "http=>//YOUR_POSTBACK_URL",
+            "wait_retry_delay"=> 5,
+            "retry_postback" => true,
+            "get_exif" => true,
+            "v" => 1.20,
+            "functions"=> [
+                {
+                    "name"=> "resize_to_fit",
+                    "params"=> {
+                        "width"=> 100,
+                        "autosharpen"=> true
+                    },
+                    "save"=> {
+                        "image_identifier"=> "MY_CLIENT_ID"
+                    }
+                }
+            ]
       })
 
 
@@ -43,19 +50,23 @@ class TestService < Test::Unit::TestCase
     should "be able to add job via hash and wait for polling" do
       blitline = Blitline.new
       blitline.add_job_via_hash({
-          "application_id"=>"#{ENV['BLITLINE_APPLICATION_ID']}",
-          "src"=>"http://cdn.blitline.com/filters/boys.jpeg",
-          "functions"=>[
-              {
-                  "name"=>"resize_to_fit",
-                  "params"=>{
-                      "width"=>100
-                  },
-                  "save"=>{
-                      "image_identifier"=>"MY_CLIENT_ID"
-                  }
-              }
-          ]
+            "application_id"=> "#{ENV['BLITLINE_APPLICATION_ID']}",
+            "src"=> SAMPLE_IMAGE_SRC,
+            "src_data" => { "colorspace" => "srgb"},
+            "get_exif" => true,
+            "v" => 1.20,
+            "functions"=> [
+                {
+                    "name"=> "resize_to_fit",
+                    "params"=> {
+                        "width"=> 100,
+                        "autosharpen"=> true
+                    },
+                    "save"=> {
+                        "image_identifier"=> "MY_CLIENT_ID"
+                    }
+                }
+            ]
       })
 
 
@@ -68,7 +79,7 @@ class TestService < Test::Unit::TestCase
       blitline = Blitline.new
       blitline.add_job_via_hash({
           "application_id"=>"#{ENV['BLITLINE_APPLICATION_ID']}",
-          "src"=>"http://cdn.blitline.com/filters/boys.jpeg",
+          "src"=>SAMPLE_IMAGE_SRC,
           "functions"=>[
               {
                   "name"=>"resize_to_fit",

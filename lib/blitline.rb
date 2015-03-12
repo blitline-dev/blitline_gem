@@ -51,15 +51,25 @@ class Blitline
   def post_jobs
     validate
     result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+    if result.is_a?(Hash)
+       json_result = result
+     else
+       json_result = MultiJson.load(result)
+     end 
     @jobs = [] # clear jobs
-    return MultiJson.load(result)
+    return json_result
   end
 
   def post_job_and_wait_for_poll
      validate
      raise "'post_job_with_poll' requires that there is only 1 job to submit" unless @jobs.length==1
      result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
-     json_result = MultiJson.load(result)
+     if result.is_a?(Hash)
+       json_result = result
+     else
+       json_result = MultiJson.load(result)
+     end
+
      raise "Error posting job: #{result.to_s}" if result["error"]
      job_id = json_result["results"][0]["job_id"]
      return poll_job(job_id)
@@ -69,8 +79,12 @@ class Blitline
      raise "Invalid 'job_id'" unless job_id && job_id.length > 0
      url = "/listen/#{job_id}"
      response = Net::HTTP.get('cache.blitline.com', url)
-     json_response = MultiJson.load(response)
-     return_results = MultiJson.load(json_response["results"])
+     if response.is_a?(Hash)
+       json_result = response
+     else
+       json_result = MultiJson.load(response)
+     end
+     return_results = json_result["results"]
 
      return return_results
   end
