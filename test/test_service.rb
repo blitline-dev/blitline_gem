@@ -75,6 +75,37 @@ class TestService < Test::Unit::TestCase
       assert(returned_values['images'].length > 0, "No images returned")
     end
 
+    should "be able to set timoeut for polling" do
+      assert_raises Net::ReadTimeout do
+        blitline = Blitline.new
+        blitline.add_job_via_hash({
+              "application_id"=> "#{ENV['BLITLINE_APPLICATION_ID']}",
+              "src"=> SAMPLE_IMAGE_SRC,
+              "src_data" => { "colorspace" => "srgb"},
+              "get_exif" => true,
+              "v" => 1.20,
+              "functions"=> [
+                  {
+                      "name"=> "resize_to_fit",
+                      "params"=> {
+                          "width"=> 100,
+                          "autosharpen"=> true
+                      },
+                      "save"=> {
+                          "image_identifier"=> "MY_CLIENT_ID"
+                      }
+                  }
+              ]
+        })
+
+
+        returned_values = blitline.post_job_and_wait_for_poll(0)
+        assert(returned_values.length > 0, "No results returned")
+        assert(returned_values['images'].length > 0, "No images returned")
+      end
+    end
+
+
     should "be able to handle incorrect JSON" do
       blitline = Blitline.new
       blitline.add_job_via_hash({
