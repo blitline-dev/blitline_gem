@@ -46,3 +46,6 @@ DEPENDENCIES
   jeweler
   multi_json
   shoulda
+
+BUNDLED WITH
+   1.10.2

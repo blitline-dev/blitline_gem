@@ -7,7 +7,7 @@ class Blitline
   require 'blitline/s3_destination'
   require 'blitline/http_poster'
   require 'net/http'
-  
+
   include AttributeJsonizer
   attr_accessor :jobs
 
@@ -55,12 +55,12 @@ class Blitline
        json_result = result
      else
        json_result = MultiJson.load(result)
-     end 
+     end
     @jobs = [] # clear jobs
     return json_result
   end
 
-  def post_job_and_wait_for_poll
+  def post_job_and_wait_for_poll(timeout_secs = 60)
      validate
      raise "'post_job_with_poll' requires that there is only 1 job to submit" unless @jobs.length==1
      result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
@@ -72,21 +72,37 @@ class Blitline
 
      raise "Error posting job: #{result.to_s}" if result["error"]
      job_id = json_result["results"][0]["job_id"]
-     return poll_job(job_id)
+     return poll_job(job_id, timeout_secs)
   end
 
-  def poll_job(job_id)
+  def poll_job(job_id, timeout_secs = 60)
      raise "Invalid 'job_id'" unless job_id && job_id.length > 0
      url = "/listen/#{job_id}"
-     response = Net::HTTP.get('cache.blitline.com', url)
+     response = fetch(url, timeout_secs)
+
      if response.is_a?(Hash)
        json_result = response
      else
        json_result = MultiJson.load(response)
      end
-     return_results = json_result["results"]
+
+     # Change 2.5.0 -> 2.5.1 (Return JSON instead of string)
+     if json_result["results"].is_a?(Hash)
+       return_results = json_result["results"]
+     else
+       return_results = MultiJson.load(json_result["results"])
+     end
 
      return return_results
   end
 
+  def fetch(uri_str, timeout_secs, limit = 10)
+    raise "Too Many Redirects" if limit == 0
+
+    http = Net::HTTP.new("cache.blitline.com")
+    http.read_timeout = timeout_secs
+    request = Net::HTTP::Get.new(uri_str)
+    response = http.request(request, uri_str)
+    MultiJson.load(response.body)
+  end
 end
