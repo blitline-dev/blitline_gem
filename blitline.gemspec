@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/blitline-dev/blitline"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.4.3"
+  s.rubygems_version = "2.4.5"
   s.summary = "Blitline provides simple image processing in the cloud"
 
   if s.respond_to? :specification_version then
