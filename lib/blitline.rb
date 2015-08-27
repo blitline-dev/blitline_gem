@@ -50,7 +50,7 @@ class Blitline
 
   def post_jobs
     validate
-    result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+    result = Blitline::HttpPoster.post("https://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
     if result.is_a?(Hash)
        json_result = result
      else
@@ -63,7 +63,7 @@ class Blitline
   def post_job_and_wait_for_poll(timeout_secs = 60)
      validate
      raise "'post_job_with_poll' requires that there is only 1 job to submit" unless @jobs.length==1
-     result = Blitline::HttpPoster.post("http://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
+     result = Blitline::HttpPoster.post("https://#{@domain}.blitline.com/job", { :json => MultiJson.dump(@jobs)})
      if result.is_a?(Hash)
        json_result = result
      else
@@ -99,7 +99,8 @@ class Blitline
   def fetch(uri_str, timeout_secs, limit = 10)
     raise "Too Many Redirects" if limit == 0
 
-    http = Net::HTTP.new("cache.blitline.com")
+    http = Net::HTTP.new("cache.blitline.com", 443)
+    http.use_ssl = true
     http.read_timeout = timeout_secs
     request = Net::HTTP::Get.new(uri_str)
     response = http.request(request, uri_str)

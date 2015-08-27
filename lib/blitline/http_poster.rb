@@ -9,6 +9,7 @@ class Blitline
     def self.post(path, form_data=nil, &block)
       uri = URI.parse(path) unless path.is_a?(URI)
       @http = Net::HTTP.new(uri.host, uri.port)
+      @http.use_ssl = true if uri.port == 443
       request = Net::HTTP::Post.new(path)
       request.set_form_data(form_data) if form_data
       @http.request(request) do |response|
