@@ -4,6 +4,7 @@ class TestService < Test::Unit::TestCase
   if ENV['BLITLINE_APPLICATION_ID']
     require 'multi_json'
     SAMPLE_IMAGE_SRC = "http://www.google.com/intl/en_com/images/srpr/logo3w.png"
+    SAMPLE_PDF = "https://s3.amazonaws.com/blitdoc/pdfs/nice.pdf"
 
     should "be able to commit a simple job to service" do
       blitline = Blitline.new
@@ -45,6 +46,32 @@ class TestService < Test::Unit::TestCase
       returned_values = blitline.post_jobs
       assert(returned_values.length > 0, "No results returned")
       assert(returned_values['results'][0]['images'].length > 0, "No images returned")
+    end
+
+    should "be able to handle pdf burst and wait_for_poll" do
+      blitline = Blitline.new
+      blitline.add_job_via_hash({
+            "application_id"=> "#{ENV['BLITLINE_APPLICATION_ID']}",
+            "src"=> SAMPLE_PDF,
+            "v" => 1.20,
+            "src_type" => "burst_pdf",
+            "functions"=> [
+                {
+                    "name"=> "resize_to_fit",
+                    "params"=> {
+                        "width"=> 100
+                    },
+                    "save"=> {
+                        "image_identifier"=> "MY_CLIENT_ID"
+                    }
+                }
+            ]
+      })
+
+      returned_values = blitline.post_job_and_wait_for_poll
+      assert(returned_values['images'].length > 0, "No images returned")
+      assert(returned_values['images'][0]["url"], "No images returned")
+      assert(returned_values['images'][0]["url"].end_with?("__0.jpg"), "Not burst result")
     end
 
     should "be able to add job via hash and wait for polling" do

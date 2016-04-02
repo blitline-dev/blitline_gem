@@ -29,17 +29,6 @@ class TestBlitline < Test::Unit::TestCase
     end
   end
 
-  should "raise exception if job missing image identifier" do
-    assert_raises RuntimeError do
-      blitline = Blitline.new
-      job =  Blitline::Job.new("http://ww.foo.com")
-      job.application_id = "foo"
-      job.add_function("blur", nil, "my_image")
-      blitline.jobs << job
-      results = blitline.post_jobs
-    end
-  end
-
   should "properly jsonize the jsonizable_attributes" do
     job =  Blitline::Job.new("http://ww.foo.com")
     job.add_function("blue", nil, "my_image")

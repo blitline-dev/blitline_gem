@@ -33,11 +33,14 @@ GEM
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
+    power_assert (0.2.2)
     rack (1.5.2)
     rake (10.1.1)
     rdoc (4.1.1)
       json (~> 1.4)
     shoulda (2.11.3)
+    test-unit (3.0.8)
+      power_assert
 
 PLATFORMS
   ruby
@@ -46,6 +49,7 @@ DEPENDENCIES
   jeweler
   multi_json
   shoulda
+  test-unit
 
 BUNDLED WITH
-   1.10.2
+   1.11.2

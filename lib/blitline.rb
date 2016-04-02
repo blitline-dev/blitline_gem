@@ -71,13 +71,18 @@ class Blitline
      end
 
      raise "Error posting job: #{result.to_s}" if result["error"]
-     job_id = json_result["results"][0]["job_id"]
+
+     # handle async group jobs if existing
+     job_id = json_result["results"][0]["group_completion_job_id"]
+     # otherwise assume regular job poll
+     job_id = json_result["results"][0]["job_id"] unless job_id
      return poll_job(job_id, timeout_secs)
   end
 
   def poll_job(job_id, timeout_secs = 60)
      raise "Invalid 'job_id'" unless job_id && job_id.length > 0
      url = "/listen/#{job_id}"
+
      response = fetch(url, timeout_secs)
 
      if response.is_a?(Hash)
