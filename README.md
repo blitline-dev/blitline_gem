@@ -1,7 +1,7 @@
 Getting Started
 ===============
 
-You must first have a Blitline.com account to successfully use the gem. You can obtain one (free) by going to http://www.blitline.com
+You must first have a Blitline.com account to successfully use the gem. You can obtain one (free) by going to https://www.blitline.com
 
 Once you have your account, you will need to find you APPLICATION_ID which you can get by logging in and clicking on the *Account* tab.
 
@@ -14,14 +14,10 @@ or...if you have a Gemfile
 
     gem 'blitline'
 
-*Note: We have changed our recommended method of submitting Blitline jobs to just submitting job hashes instead of building
-objects through an object model. This is because the Blitline API changes and evolves faster than people can/want to update their gems. 
-Old ways will still work, they will just not be used in documentation going forward. Since Blitline works via a JSON API, it is
-easier to understand the hierarchy of the job when viewed as a hash. (You can find some old object based documentation [here](https://github.com/blitline-dev/blitline/wiki))*
 
-Learn more about [job hashes](http://www.blitline.com/docs/api) and see some related JSON [examples](http://www.blitline.com/docs/examples)
+You can find comprehensive documentation at http://helpdocs.blitline.com/
 
-## The new preferred method is as follows:
+## The method is as follows:
 
 Once the gem is installed, you can start a Rails console and try the following:
 
@@ -56,6 +52,17 @@ This JSON contains:
   - Each image has an `image_identifier`, which is the `image_identifier` you used in the `save` params.
   - Each image also has an `s3_url` which is the final destination of the image (once it is done processing).
 
+
+### GDPR Compliance ###
+If you want all your processing to be done in the EU (and adhere to those GDPR standards), you must set the following Environenment Variable
+
+```
+  BLITLINE_DOMAIN=eu
+```
+
+This will cause all data to be posted to EU servers and all processing done on EU server. It may also increase performance if you S3 (or other) storage is in the EU.
+
+
 ### Important! ###
 This result does not indicate that the job is done! The job has been put on a queue and will be done shortly. The best
 way to identify when the job is completed is by adding a `postback_url` to the job hash and we will call back that url
@@ -80,7 +87,6 @@ In fact, this result will contain all the exact same information a Blitline post
 
 The example above is a trivial (and pretty uninteresting) demonstration of how to use the Blitline gem. You can find documentation about Blitline.com and it's services by following the links below
 
-* [Quickstart](http://www.blitline.com/docs/quickstart)
-* [Blitline Blog](http://blitline.tumblr.com)
-* [See all the available functions](http://www.blitline.com/docs/functions)
+* [Quickstart](https://www.blitline.com/v3/home/quickstart)
+* [See all the available functions](https://blitline.helpdocs.io/article/FPSBvm8AxD-list-of-available-functions)
 
